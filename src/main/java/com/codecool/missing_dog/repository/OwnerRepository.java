@@ -20,7 +20,7 @@ public class OwnerRepository {
      * @return optional of Owner
      */
     public Optional<Owner> getById(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return data.stream().filter(owner -> owner.getId() == id).findFirst();
     }
 
     /**
@@ -38,6 +38,6 @@ public class OwnerRepository {
      * @return optional of Owner
      */
     public Optional<Owner> getByEmail(String value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return data.stream().filter(owner -> owner.getEmail().equals(value)).findFirst();
     }
 }
