@@ -2,13 +2,16 @@ package com.codecool.missing_dog.controller;
 
 import com.codecool.missing_dog.input.Input;
 import com.codecool.missing_dog.model.Dog;
+import com.codecool.missing_dog.model.Owner;
 import com.codecool.missing_dog.repository.DogRepository;
 import com.codecool.missing_dog.repository.OwnerRepository;
 import com.codecool.missing_dog.view.View;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Controller {
     private final DogRepository dogRepository;
@@ -66,7 +69,9 @@ public class Controller {
      * The right Optional method choice makes the call a single liner.
      */
     void showDogById() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int id = input.getIntInput("Type the dog's id to search by");
+        Optional<Dog> optionalDog = dogRepository.getById(id);
+        optionalDog.ifPresentOrElse(view::printDog, view::noDataFound);
     }
 
     /**
@@ -80,7 +85,9 @@ public class Controller {
      * The right Optional method choice makes the call a single liner.
      */
     void showOwnerById() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int id = input.getIntInput("Type the owner's id to search by");
+        Optional<Owner> optionalOwner = ownerRepository.getById(id);
+        optionalOwner.ifPresentOrElse(view::printOwner, view::noDataFound);
     }
 
     /**
@@ -114,7 +121,9 @@ public class Controller {
      * The right Optional method choice makes the call a single liner.
      */
     void showOwnerPhoneNoByDogId() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int id = input.getIntInput("Type the dog's id to search the owner's phone no");
+        Optional<String> optionalPhoneNo = dogRepository.getOwnerPhoneNoByDogId(id);
+        optionalPhoneNo.ifPresentOrElse(view::printData, view::noDataFound);
     }
 
     private void showDogsBySociability() {
@@ -154,7 +163,9 @@ public class Controller {
      * The right Optional method choice makes the call a single liner.
      */
     void showOwnerFullNameByDogId() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int id = input.getIntInput("Type the dog's id to search the name of an owner");
+        Optional<String> optionalName = dogRepository.getOwnerFullNameByDogId(id);
+        optionalName.ifPresentOrElse(view::printData, view::noDataFound);
     }
 
     private void showCountOfDogsForOwnerOfDogWithId() {
