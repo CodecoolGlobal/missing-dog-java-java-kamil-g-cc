@@ -97,8 +97,18 @@ public class DataGenerator {
      * @param ownerList list of randomly generated Owners with empty List of Dogs
      */
     private void pairDogsWithOwners(List<Dog> dogList, List<Owner> ownerList) {
-        throw new UnsupportedOperationException("Not implemented yet");
 
+        for(Dog dog : dogList){
+            int randomOwnerId = getRandomIntInRange(0, ownersAmount);
+            Optional<Owner> optionalOwner = ownerList
+                    .stream()
+                    .filter(o -> o.getId() == randomOwnerId)
+                    .findFirst();
+            optionalOwner.ifPresent(owner -> {
+                owner.addDogToList(dog);
+                dog.setOwner(owner);
+            });
+        }
 //        for (Dog dog : dogList) {
 //            int randomOwnerId = getRandomIntInRange(1, ownersAmount);
 //        }
